@@ -41,6 +41,8 @@
                         <a href="{{ route('home') }}" class="nav-link">Home</a>
                         {{-- FARMERS --}}
                         <a href="{{ route('farmers.index') }}" class="nav-link">Data Petani</a>
+                        {{-- FIELDS --}}
+                        <a href="{{ route('fields.index') }}" class="nav-link">Data Lahan</a>
 
 
                     </ul>

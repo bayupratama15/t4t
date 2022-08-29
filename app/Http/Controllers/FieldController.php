@@ -19,7 +19,8 @@ class FieldController extends Controller
      */
     public function index()
     {
-        //
+        $data = Field::latest()->paginate(5);
+        return view('fields.index', compact('data'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -29,7 +30,7 @@ class FieldController extends Controller
      */
     public function create()
     {
-        //
+        return view('fields.create');
     }
 
     /**
@@ -40,7 +41,16 @@ class FieldController extends Controller
      */
     public function store(Request $request)
     {
-        //
+
+        $request->validate([
+            'name_fields' => 'required',
+            'latitude_fields' => 'required',
+            'longitude_fields' => 'required',
+            'address_fields' => 'required',
+        ]);
+        Field::create($request->all());
+        return redirect()->route('fields.index')
+            ->with('success', 'Data Berhasil ditambahkan.');
     }
 
     /**
@@ -60,9 +70,13 @@ class FieldController extends Controller
      * @param  \App\Models\Field  $field
      * @return \Illuminate\Http\Response
      */
-    public function edit(Field $field)
+    public function edit($id)
     {
-        //
+        $field = Field::findOrFail($id);
+
+        return view('fields.edit', [
+            'fields' => $field
+        ]);
     }
 
     /**
@@ -74,7 +88,15 @@ class FieldController extends Controller
      */
     public function update(Request $request, Field $field)
     {
-        //
+        $request->validate([
+            'name_fields' => 'required',
+            'latitude_fields' => 'required',
+            'longitude_fields' => 'required',
+            'address_fields' => 'required',
+        ]);
+        Field::find($field->id)->update($request->all());
+        return redirect()->route('fields.index')
+            ->with('success', 'Data Berhasil diubah.');
     }
 
     /**
@@ -83,8 +105,10 @@ class FieldController extends Controller
      * @param  \App\Models\Field  $field
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Field $field)
+    public function destroy($id)
     {
-        //
+        Field::find($id)->delete();
+        return redirect()->route('fields.index')
+            ->with('success', 'Data Berhasil dihapus.');
     }
 }

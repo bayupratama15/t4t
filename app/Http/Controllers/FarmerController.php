@@ -19,7 +19,8 @@ class FarmerController extends Controller
      */
     public function index()
     {
-        return view('Farmers.index');
+        $data = Farmers::latest()->paginate(5);
+        return view('farmers.index', compact('data'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -29,7 +30,7 @@ class FarmerController extends Controller
      */
     public function create()
     {
-        //
+        return view('Farmers.create');
     }
 
     /**
@@ -40,7 +41,13 @@ class FarmerController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name_farmers' => 'required',
+        ]);
+
+        Farmers::create($request->all());
+        return redirect()->route('farmers.index')
+            ->with('success', 'Data Berhasil ditambahkan.');
     }
 
     /**
@@ -60,9 +67,13 @@ class FarmerController extends Controller
      * @param  \App\Models\Farmers  $farmers
      * @return \Illuminate\Http\Response
      */
-    public function edit(Farmers $farmers)
+    public function edit($id)
     {
-        //
+        $farmers = Farmers::findOrFail($id);
+
+        return view('farmers.edit', [
+            'farmers' => $farmers
+        ]);
     }
 
     /**
@@ -72,9 +83,15 @@ class FarmerController extends Controller
      * @param  \App\Models\Farmers  $farmers
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Farmers $farmers)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name_farmers' => 'required',
+        ]);
+        Farmers::find($id)->update($request->all());
+
+        return redirect()->route('farmers.index')
+            ->with('success', 'Data berhasil terupdate');
     }
 
     /**
@@ -83,8 +100,9 @@ class FarmerController extends Controller
      * @param  \App\Models\Farmers  $farmers
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Farmers $farmers)
+    public function destroy($id)
     {
-        //
+        Farmers::find($id)->delete();
+        return back()->with('success', 'Data berhasil terhapus');
     }
 }

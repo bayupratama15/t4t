@@ -22,7 +22,7 @@ Auth::routes();
 Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
 // FARMERS 
-Route::get('/farmers', [App\Http\Controllers\FarmerController::class, 'index'])->name('farmers.index');
+Route::resource('/farmers', FarmerController::class);
 
 // FIELDS
-Route::get('/fields', [App\Http\Controllers\FieldController::class, 'index'])->name('fields.index');
+Route::resource('/fields', FieldController::class);
