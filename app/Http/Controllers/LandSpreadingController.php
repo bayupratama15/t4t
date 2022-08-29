@@ -14,7 +14,8 @@ class LandSpreadingController extends Controller
      */
     public function index()
     {
-        //
+        $data = LandSpreading::with('getDataFarmer', 'getDataField')->latest()->paginate(5);
+        return view('LandSpreading.index', compact('data'))->with('i', (request()->input('page', 1) - 1) * 5);
     }
 
     /**
@@ -24,7 +25,7 @@ class LandSpreadingController extends Controller
      */
     public function create()
     {
-        //
+        return view('LandSpreading.create');
     }
 
     /**
@@ -35,7 +36,13 @@ class LandSpreadingController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'field_id' => 'required',
+            'farmer_id' => 'required',
+        ]);
+        LandSpreading::create($request->all());
+        return redirect()->route('land_spreadings.index')
+            ->with('success', 'Data Berhasil ditambahkan.');
     }
 
     /**
@@ -55,9 +62,14 @@ class LandSpreadingController extends Controller
      * @param  \App\Models\LandSpreading  $landSpreading
      * @return \Illuminate\Http\Response
      */
-    public function edit(LandSpreading $landSpreading)
+    public function edit($id)
     {
         //
+        $landSpreading = LandSpreading::findOrFail($id);
+
+        return view('LandSpreading.edit', [
+            'landSpreading' => $landSpreading
+        ]);
     }
 
     /**
@@ -69,7 +81,13 @@ class LandSpreadingController extends Controller
      */
     public function update(Request $request, LandSpreading $landSpreading)
     {
-        //
+        $request->validate([
+            'field_id' => 'required',
+            'farmer_id' => 'required',
+        ]);
+        $landSpreading->update($request->all());
+        return redirect()->route('land_spreadings.index')
+            ->with('success', 'Data Berhasil diubah.');
     }
 
     /**
@@ -78,8 +96,10 @@ class LandSpreadingController extends Controller
      * @param  \App\Models\LandSpreading  $landSpreading
      * @return \Illuminate\Http\Response
      */
-    public function destroy(LandSpreading $landSpreading)
+    public function destroy($id)
     {
-        //
+        LandSpreading::find($id)->delete();
+        return redirect()->route('land_spreadings.index')
+            ->with('success', 'Data Berhasil dihapus.');
     }
 }

@@ -11,4 +11,14 @@ class LandSpreading extends Model
     protected $primaryKey = 'id';
     protected $fillable = ['field_id', 'farmer_id'];
     use HasFactory;
+
+    public function getDataFarmer()
+    {
+        return $this->hasOne(Farmers::class, 'id', 'farmer_id');
+    }
+
+    public function getDataField()
+    {
+        return $this->hasOne(Field::class, 'id', 'field_id');
+    }
 }

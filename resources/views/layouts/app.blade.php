@@ -20,6 +20,22 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
 
+    <link href="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.css" rel="stylesheet">
+    <script src="https://api.mapbox.com/mapbox-gl-js/v2.10.0/mapbox-gl.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+        }
+
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            width: 100%;
+        }
+    </style>
+
 </head>
 
 <body>
@@ -43,6 +59,8 @@
                         <a href="{{ route('farmers.index') }}" class="nav-link">Data Petani</a>
                         {{-- FIELDS --}}
                         <a href="{{ route('fields.index') }}" class="nav-link">Data Lahan</a>
+                        {{-- LAND SPREADINGS --}}
+                        <a href="{{ route('land_spreadings.index') }}" class="nav-link">Data Transaksi</a>
 
 
                     </ul>
@@ -90,6 +108,12 @@
             @yield('content')
         </main>
     </div>
+    <script src="https://code.jquery.com/jquery-3.3.1.min.js"
+        integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"
+        integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous">
+    </script>
+    @yield('scripts')
 </body>
 
 </html>

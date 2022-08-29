@@ -26,3 +26,6 @@ Route::resource('/farmers', FarmerController::class);
 
 // FIELDS
 Route::resource('/fields', FieldController::class);
+
+// LandSpreading
+Route::resource('/land_spreadings', LandSpreadingController::class);

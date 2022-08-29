@@ -2,9 +2,9 @@
 
 @section('content')
 <div class="container">
+    <h4>Data Lahan</h4>
     <div class="row justify-content-center">
         <div class="col-md-12">
-
             <div class="row">
                 <div class="col-md-4">
                     @if($message = Session::get('success'))
