@@ -16,6 +16,9 @@ class CreateFarmersTable extends Migration
         Schema::create('farmers', function (Blueprint $table) {
             $table->id();
             $table->string("name_farmers", 200);
+            $table->text("address_farmers")->nullable();
+            $table->foreignId('created_by')->nullable()->constrained('users');
+            $table->foreignId('updated_by')->nullable()->constrained('users');
             $table->timestamps();
         });
     }

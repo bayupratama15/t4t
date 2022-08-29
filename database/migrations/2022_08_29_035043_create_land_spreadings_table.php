@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateFieldsTable extends Migration
+class CreateLandSpreadingsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,10 @@ class CreateFieldsTable extends Migration
      */
     public function up()
     {
-        Schema::create('fields', function (Blueprint $table) {
+        Schema::create('land_spreadings', function (Blueprint $table) {
             $table->id();
-            $table->string("name_fields", 200);
-            $table->text("latitude_fields");
-            $table->text("longitude_fields");
-            $table->text("address_fields")->nullable();
+            $table->foreignId('field_id')->constrained('fields')->onDelete('cascade');
+            $table->foreignId('farmer_id')->constrained('farmers')->onDelete('cascade');
             $table->foreignId('created_by')->nullable()->constrained('users');
             $table->foreignId('updated_by')->nullable()->constrained('users');
             $table->timestamps();
@@ -32,6 +30,6 @@ class CreateFieldsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('fields');
+        Schema::dropIfExists('land_spreadings');
     }
 }

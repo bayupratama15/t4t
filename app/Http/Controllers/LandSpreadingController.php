@@ -2,16 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Field;
+use App\Models\LandSpreading;
 use Illuminate\Http\Request;
 
-class FieldController extends Controller
+class LandSpreadingController extends Controller
 {
-
-    public function __construct()
-    {
-        $this->middleware('auth');
-    }
     /**
      * Display a listing of the resource.
      *
@@ -46,10 +41,10 @@ class FieldController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Field  $field
+     * @param  \App\Models\LandSpreading  $landSpreading
      * @return \Illuminate\Http\Response
      */
-    public function show(Field $field)
+    public function show(LandSpreading $landSpreading)
     {
         //
     }
@@ -57,10 +52,10 @@ class FieldController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Models\Field  $field
+     * @param  \App\Models\LandSpreading  $landSpreading
      * @return \Illuminate\Http\Response
      */
-    public function edit(Field $field)
+    public function edit(LandSpreading $landSpreading)
     {
         //
     }
@@ -69,10 +64,10 @@ class FieldController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @param  \App\Models\Field  $field
+     * @param  \App\Models\LandSpreading  $landSpreading
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Field $field)
+    public function update(Request $request, LandSpreading $landSpreading)
     {
         //
     }
@@ -80,10 +75,10 @@ class FieldController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Field  $field
+     * @param  \App\Models\LandSpreading  $landSpreading
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Field $field)
+    public function destroy(LandSpreading $landSpreading)
     {
         //
     }
